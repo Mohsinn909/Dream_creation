@@ -147,6 +147,25 @@
         nav ul li a:hover {
             color: var(--accent-color);
         }
+        
+        .nav-whatsapp-btn {
+            background-color: #25D366;
+            color: var(--white) !important;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+        
+        .nav-whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            color: var(--white) !important;
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
 
         .mobile-menu-btn {
             display: none;
@@ -1098,7 +1117,8 @@
         <div class="header-container container">
             <a href="#" class="logo">DREAM <span>CREATION EVENTS</span></a>
             <button class="mobile-menu-btn" aria-label="Toggle menu">
-                <i class="fas fa-bars"></i>
+                <i class="fas fa-bars menu-icon"></i>
+                <i class="fas fa-times close-icon" style="display: none;"></i>
             </button>
             <nav>
                 <ul>
@@ -1106,7 +1126,7 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://wa.me/911234567890" class="nav-whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp Us</a></li>
                 </ul>
             </nav>
         </div>
@@ -1409,9 +1429,20 @@
             // Mobile menu toggle
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const nav = document.querySelector('nav');
+            const menuIcon = document.querySelector('.menu-icon');
+            const closeIcon = document.querySelector('.close-icon');
             
             mobileMenuBtn.addEventListener('click', function() {
                 nav.classList.toggle('active');
+                
+                // Toggle between hamburger and X icons
+                if (nav.classList.contains('active')) {
+                    menuIcon.style.display = 'none';
+                    closeIcon.style.display = 'inline-block';
+                } else {
+                    menuIcon.style.display = 'inline-block';
+                    closeIcon.style.display = 'none';
+                }
             });
             
             // Close menu when clicking on a link
@@ -1419,6 +1450,8 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', function() {
                     nav.classList.remove('active');
+                    menuIcon.style.display = 'inline-block';
+                    closeIcon.style.display = 'none';
                 });
             });
             
