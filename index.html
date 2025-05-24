@@ -178,7 +178,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(to right, rgba(255,255,255,0.85), rgba(255,255,255,0.6)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(to right, rgba(255,255,255,0.85), rgba(255,255,255,0.6)), url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -1461,11 +1461,20 @@
                     e.preventDefault();
                     
                     const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
+                    // Make sure targetId is not just #
+                    if (targetId && targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 70,
+                                behavior: 'smooth'
+                            });
+                        }
+                    } else if (targetId === '#') {
+                        // If href is just #, scroll to top
                         window.scrollTo({
-                            top: targetElement.offsetTop - 70,
+                            top: 0,
                             behavior: 'smooth'
                         });
                     }
